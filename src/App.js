@@ -1,30 +1,23 @@
 import React, {Component} from 'react';
 import Header from './Header';
 import Post from './Post';
+import PostForm from './PostForm';
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      posts: [{
-        id: 0,
-        title: 'First post',
-        content: 'Donec id elit non mi porta gravida at eget metus. Aenean lacinia bibendum nulla sed consectetur.',
-        date: new Date(),
-        comments: [{
-          id: 0,
-          author: 'Kristijan',
-          content: 'Etiam porta sem malesuada magna mollis euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          date: new Date()
-        }, {
-          id: 1,
-          author: 'Marko',
-          content: 'Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
-          date: new Date()
-        }]
-      }]
+      posts: []
     };
+    this.handlePostCreate = this.handlePostCreate.bind(this);
+  }
+
+  handlePostCreate(post) {
+    const posts = this.state.posts;
+    posts.push(post);
+    const sortedPosts = posts.sort((a, b) => a.date < b.date);
+    this.setState({posts: sortedPosts});
   }
 
   render() {
@@ -34,20 +27,18 @@ export default class App extends Component {
       posts = <em>No posts to show</em>;
     } else {
       posts = this.state.posts.map((post) => (
-        <Post
-          key={post.id}
-          title={post.title}
-          content={post.content}
-          date={post.date}
-          comments={post.comments}
-        />
+        <Post key={post.id} {...post} />
       ));
     }
 
     return (
       <div className='container'>
         <Header />
+        <h2>{'All posts'}</h2>
         {posts}
+        <hr />
+        <h2>{'Crete new post'}</h2>
+        <PostForm handleSubmit={this.handlePostCreate} />
       </div>
     );
   }
