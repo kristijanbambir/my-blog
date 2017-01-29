@@ -7,7 +7,23 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [{
+        id: 0,
+        title: 'First post',
+        content: 'Donec id elit non mi porta gravida at eget metus. Aenean lacinia bibendum nulla sed consectetur.',
+        date: new Date(),
+        comments: [{
+          id: 0,
+          author: 'Kristijan',
+          content: 'Etiam porta sem malesuada magna mollis euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          date: new Date()
+        }, {
+          id: 1,
+          author: 'Marko',
+          content: 'Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
+          date: new Date()
+        }]
+      }]
     };
   }
 
@@ -23,6 +39,7 @@ export default class App extends Component {
           title={post.title}
           content={post.content}
           date={post.date}
+          comments={post.comments}
         />
       ));
     }
