@@ -27,17 +27,14 @@ export default class App extends Component {
       posts = <em>No posts to show</em>;
     } else {
       posts = this.state.posts.map((post) => (
-        <Post key={post.id} {...post} />
+        <Post key={post.id} post={post} />
       ));
     }
 
     return (
       <div className='container'>
         <Header />
-        <h2>{'All posts'}</h2>
         {posts}
-        <hr />
-        <h2>{'Crete new post'}</h2>
         <PostForm handleSubmit={this.handlePostCreate} />
       </div>
     );
