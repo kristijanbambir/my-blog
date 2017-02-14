@@ -40,7 +40,7 @@ export default class PostForm extends Component {
   render() {
     return (
       <div>
-        <h2>{'Crete new post'}</h2>
+        <h2>{'Create new post'}</h2>
         <form onSubmit={this.handleSubmit}>
           <div className='form-group'>
             <label htmlFor='author'>Title</label>
